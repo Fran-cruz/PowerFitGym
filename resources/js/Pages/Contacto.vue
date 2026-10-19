@@ -136,24 +136,29 @@ onBeforeUnmount(() => {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
 
-                        <article class="box pf-panel pf-social-panel">
-                            <h2 class="title is-4 has-text-white mb-5">Síguenos</h2>
-                            <div class="buttons">
-                                <a class="button pf-social-button" href="https://www.instagram.com/frannn.cruz_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                    <span class="icon"><i class="mdi mdi-instagram"></i></span>
-                                </a>
-                                <a class="button pf-social-button" href="https://www.francruz.tech/" target="_blank" rel="noopener noreferrer" aria-label="Sitio web">
-                                    <span class="icon"><i class="mdi mdi-web"></i></span>
-                                </a>
-                                <a class="button pf-social-button" href="https://www.youtube.com/watch?v=8RFbx4lK-Qs" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                                    <span class="icon"><i class="mdi mdi-youtube"></i></span>
-                                </a>
-                                <a class="button pf-social-button" href="https://github.com/Fran-cruz/PowerFitGym" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                                    <span class="icon"><i class="mdi mdi-github"></i></span>
-                                </a>
+                                <div class="media pf-contact-item">
+                                    <div class="media-left"><span class="pf-icon-circle"><i class="mdi mdi-account"></i></span></div>
+
+                                    <div class="media-content">
+                                        <h2 class="has-text-white has-text-weight-semibold mb-1">Síguenos</h2>
+                                        <div class="buttons">
+                                            <a class="button pf-social-button" href="https://www.instagram.com/frannn.cruz_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                                <span class="icon"><i class="mdi mdi-instagram"></i></span>
+                                            </a>
+                                            <a class="button pf-social-button" href="https://www.francruz.tech/" target="_blank" rel="noopener noreferrer" aria-label="Sitio web">
+                                                <span class="icon"><i class="mdi mdi-web"></i></span>
+                                            </a>
+                                            <a class="button pf-social-button" href="https://www.youtube.com/watch?v=8RFbx4lK-Qs" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                                <span class="icon"><i class="mdi mdi-youtube"></i></span>
+                                            </a>
+                                            <a class="button pf-social-button" href="https://github.com/Fran-cruz/PowerFitGym" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                                <span class="icon"><i class="mdi mdi-github"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </article>
                     </div>
@@ -230,13 +235,15 @@ onBeforeUnmount(() => {
                     </div>
                 </div>
 
-                <div class="pf-map-shell">
-                    <div
-                        ref="mapaContenedor"
-                        class="pf-map"
-                        role="region"
-                        aria-label="Mapa de la Universidad Católica de Honduras, Campus San Isidro, en La Ceiba"
-                    ></div>
+                <div class="">
+                    <div class="pf-map-shell">
+                        <div
+                            ref="mapaContenedor"
+                            class="pf-map"
+                            role="region"
+                            aria-label="Mapa de la Universidad Católica de Honduras, Campus San Isidro, en La Ceiba"
+                        ></div>
+                    </div>
                 </div>
             </div>
         </section>
