@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 
+// espacios disponibles e imagenes para la galeria.
 const instalaciones = [
     {
         titulo: "Zona de Pesas Libres",
@@ -45,6 +46,7 @@ const instalaciones = [
     }
 ]
 
+// beneficios adicionales de las instalaciones.
 const caracteristicas = [
     {
         icono: "mdi-clock-outline",
@@ -75,6 +77,7 @@ const caracteristicas = [
                     <p class="subtitle pf-section-subtitle">500m² diseñados para tu mejor experiencia de entrenamiento</p>
                 </header>
 
+                <!-- galeria de instalaciones con imagenes de fondo. -->
                 <div class="pf-facility-grid">
                     <article
                         v-for="(instalacion, index) in instalaciones"
@@ -93,6 +96,7 @@ const caracteristicas = [
                     </article>
                 </div>
 
+                <!-- tarjetas de accesibilidad y servicios. -->
                 <div class="columns is-multiline pf-columns pf-facility-features">
                     <div v-for="feature in caracteristicas" :key="feature.titulo" class="column is-12-mobile is-4-tablet">
                         <article class="box pf-feature-card">
@@ -103,6 +107,7 @@ const caracteristicas = [
                     </div>
                 </div>
 
+                <!-- enlace hacia la pagina de contacto para agendar una visita. -->
                 <article class="box pf-panel pf-tour-panel">
                     <div class="columns is-vcentered">
                         <div class="column has-text-centered-mobile">

@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue';
 
+// informacion que se muestra en las tarjetas de entrenadores.
 const entrenadores = [
     { nombre: "Carlos Mendoza", especialidad: "Hipertrofia y Fuerza", certificaciones: ["NSCA-CPT", "Fisioterapia Deportiva"], experiencia: "8 años", bio: "Especialista en ganancia de masa muscular y fuerza. Ha competido en fisicoculturismo a nivel nacional y certificado en prevención de lesiones.", imagen: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=80" },
     { nombre: "Ana Rodríguez", especialidad: "Entrenamiento Funcional y Movilidad", certificaciones: ["CrossFit L2", "FMS", "Animal Flow"], experiencia: "6 años", bio: "Apasionada del movimiento funcional y la movilidad. Certificada en Functional Movement Systems y Animal Flow. Enfoque en calidad de movimiento.", imagen: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=800&q=80" },
@@ -25,6 +26,8 @@ const track = ref(null);
 const currentIndex = ref(itemsPerView.value);
 const isAnimating = ref(false);
 const isResetting = ref(false);
+
+// indice del entrenador real, ignorando las tarjetas clonadas.
 const activeIndex = computed(() => (
     (currentIndex.value - clonesCount.value + totalReal) % totalReal
 ));
@@ -34,6 +37,7 @@ let isHovered = false;
 let isFocused = false;
 let isMounted = false;
 
+// detener el temporizador antes de crear uno nuevo.
 const stopAutoSlide = () => {
     clearTimeout(autoSlideTimer);
     autoSlideTimer = null;
@@ -70,6 +74,7 @@ const finishSlide = (event) => {
     if (isAnimating.value) resetPosition();
 };
 
+// ajustar cuantas tarjetas se ven segun el ancho de pantalla.
 const updateItemsPerView = () => {
     const count = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 4;
     if (count === itemsPerView.value) return;
@@ -94,6 +99,7 @@ onMounted(() => {
     startAutoSlide();
 });
 
+// limpiar el temporizador y el evento al salir de la pagina.
 onUnmounted(() => {
     isMounted = false;
     stopAutoSlide();
@@ -122,6 +128,7 @@ const itemStyle = computed(() => ({
                     <p class="subtitle pf-section-subtitle">Profesionales certificados apasionados por ayudarte a alcanzar tus metas</p>
                 </header>
 
+                <!-- carrusel con controles manuales y movimiento automatico. -->
                 <div
                     class="pf-carousel"
                     role="region"
@@ -134,6 +141,7 @@ const itemStyle = computed(() => ({
                     @keydown.left.prevent="moveSlide(-1)"
                     @keydown.right.prevent="moveSlide(1)"
                 >
+                    <!-- el carril contiene clones para simular un ciclo infinito. -->
                     <div id="entrenadores-carrusel" class="pf-carousel-viewport">
                         <div ref="track" class="pf-carousel-track" :style="trackStyle" @transitionend="finishSlide">
                             <article
@@ -168,6 +176,7 @@ const itemStyle = computed(() => ({
                         </div>
                     </div>
 
+                    <!-- control para retroceder una tarjeta. -->
                     <button
                         type="button"
                         aria-label="Ver entrenador anterior"
@@ -177,6 +186,7 @@ const itemStyle = computed(() => ({
                     >
                         <span class="icon is-medium"><i class="mdi mdi-chevron-left mdi-24px"></i></span>
                     </button>
+                    <!-- control para avanzar una tarjeta. -->
                     <button
                         type="button"
                         aria-label="Ver entrenador siguiente"

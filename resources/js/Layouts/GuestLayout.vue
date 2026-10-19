@@ -5,16 +5,19 @@ import NavLink from '@/Components/NavLink.vue'
 
 defineOptions({ name: 'GuestLayout' })
 
+// estado del menu movil y del efecto de navegacion al desplazarse.
 const menuAbierto = ref(false)
 const scrolled = ref(false)
 const handleScroll = () => { scrolled.value = window.scrollY > 20 }
 
+// escuchar el desplazamiento solo mientras el layout esta montado.
 onMounted(() => window.addEventListener('scroll', handleScroll))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
 <template>
     <div class="pf-site">
+        <!-- navegacion principal compartida por las paginas publicas. -->
         <nav class="navbar pf-navbar" :class="{ 'is-scrolled': scrolled }" aria-label="Navegación principal">
             <div class="container pf-container">
                 <div class="navbar-brand">
@@ -57,8 +60,10 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
             </div>
         </nav>
 
+        <!-- aqui se muestra el contenido de cada pagina. -->
         <main class="pf-main"><slot /></main>
 
+        <!-- pie de pagina compartido con enlaces y contacto. -->
         <footer class="footer pf-footer">
             <div class="container pf-container">
                 <div class="columns is-multiline">

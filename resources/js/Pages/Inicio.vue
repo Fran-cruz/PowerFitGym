@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 
+// contenido de las tarjetas de beneficios.
 const caracteristicas = [
     { icono: 'mdi-weight-lifter', titulo: 'Equipamiento de Primera', descripcion: 'Máquinas de última generación y pesas libres para todos los niveles.' },
     { icono: 'mdi-account-tie', titulo: 'Entrenadores Certificados', descripcion: 'Profesionales que te guían y motivan en cada sesión de entrenamiento.' },
@@ -11,6 +12,7 @@ const caracteristicas = [
     { icono: 'mdi-food-apple', titulo: 'Nutrición Personalizada', descripcion: 'Planes alimenticios adaptados a tus objetivos.' },
 ]
 
+// estadisticas mostradas debajo de los beneficios.
 const estadisticas = [
     { numero: '2,000+', etiqueta: 'Vidas transformadas' },
     { numero: '7', etiqueta: 'Entrenadores certificados', blanco: true },
@@ -23,6 +25,7 @@ const estadisticas = [
     <Head title="PowerFitGym - Tu Gimnasio de Confianza" />
 
     <GuestLayout>
+        <!-- portada principal con imagen de fondo. -->
         <section id="inicio" class="pf-hero">
             <div class="pf-hero-background">
                 <img
@@ -46,6 +49,7 @@ const estadisticas = [
             </div>
         </section>
 
+        <!-- beneficios principales del gimnasio. -->
         <section class="section pf-dark-section">
             <div class="container pf-container">
                 <header class="pf-section-header">
@@ -69,6 +73,7 @@ const estadisticas = [
             </div>
         </section>
 
+        <!-- estadisticas destacadas. -->
         <section class="section pf-black-section">
             <div class="container pf-container">
                 <div class="columns is-mobile is-multiline has-text-centered">
@@ -84,6 +89,7 @@ const estadisticas = [
             </div>
         </section>
 
+        <!-- llamado final para ver las membresias. -->
         <section class="section pf-black-section">
             <div class="container pf-container has-text-centered">
                 <h2 class="title pf-section-title">¿Listo para empezar tu transformación?</h2>

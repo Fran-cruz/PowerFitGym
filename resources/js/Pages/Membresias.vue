@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 
+// planes informativos; los botones no envian solicitudes todavia.
 const planes = [
     {
         nombre: 'Mensual',
@@ -70,6 +71,7 @@ const planes = [
                     <p class="subtitle pf-section-subtitle">Elige el plan que mejor se adapte a tus objetivos y ritmo de vida</p>
                 </header>
 
+                <!-- tarjetas de precios y beneficios. -->
                 <div class="columns is-multiline pf-columns">
                     <div v-for="plan in planes" :key="plan.nombre" class="column is-12-mobile is-4-tablet">
                         <article class="card pf-card pf-pricing-card">
@@ -92,6 +94,7 @@ const planes = [
                                     </li>
                                 </ul>
 
+                                <!-- boton visual para la futura contratacion del plan. -->
                                 <button type="button" class="button is-fullwidth pf-button mt-6">
                                     {{ plan.boton }}
                                 </button>

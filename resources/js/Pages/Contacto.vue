@@ -4,9 +4,11 @@ import GuestLayout from '@/Layouts/GuestLayout.vue'
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import 'leaflet/dist/leaflet.css'
 
+// estado visual del formulario y referencia para montar el mapa.
 const mensajeEnviado = ref(false)
 const mapaContenedor = ref(null)
 
+// ubicacion de unicah, campus san isidro, en la ceiba.
 const coordenadasCampus = [15.76667, -86.80047]
 let mapa = null
 let feedbackTimer = null
@@ -19,6 +21,7 @@ const formulario = ref({
     mensaje: ''
 })
 
+// horarios mostrados en la informacion de contacto.
 const horarios = [
     'Lunes - Viernes: 5:00 AM - 11:00 PM',
     'Sábados: 7:00 AM - 9:00 PM',
@@ -27,6 +30,7 @@ const horarios = [
 ]
 
 const enviarFormulario = () => {
+    // esta etapa solo limpia el formulario y muestra confirmacion visual.
     formulario.value = {
         nombre: '',
         email: '',
@@ -45,6 +49,7 @@ const enviarFormulario = () => {
 onMounted(async () => {
     await nextTick()
 
+    // cargar leaflet solo cuando el mapa va a mostrarse.
     const leafletModule = await import('leaflet')
     const L = leafletModule.default ?? leafletModule
 
@@ -52,11 +57,13 @@ onMounted(async () => {
         scrollWheelZoom: false,
     }).setView(coordenadasCampus, 17)
 
+    // capa de mapa gratuita de openstreetmap.
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(mapa)
 
+    // marcador personalizado con un icono de mdi.
     const iconoCampus = L.divIcon({
         className: 'marcador-campus',
         html: '<span class="mdi mdi-map-marker"></span>',
@@ -80,6 +87,7 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
+    // liberar el temporizador y la instancia del mapa.
     clearTimeout(feedbackTimer)
     mapa?.remove()
     mapa = null
@@ -97,6 +105,7 @@ onBeforeUnmount(() => {
                     <p class="subtitle pf-section-subtitle">¿Listo para empezar? Estamos aquí para ayudarte</p>
                 </header>
 
+                <!-- datos de contacto y formulario visual. -->
                 <div class="columns is-multiline pf-columns">
                     <div class="column is-12-mobile is-12-tablet is-6-desktop">
                         <article class="box pf-panel">
@@ -166,6 +175,7 @@ onBeforeUnmount(() => {
                     <div class="column is-12-mobile is-12-tablet is-6-desktop">
                         <article class="box pf-panel">
                             <h2 class="title is-4 has-text-white mb-5">Envíanos un Mensaje</h2>
+                            <!-- no envia una solicitud http en esta primera etapa. -->
                             <form class="pf-form" @submit.prevent="enviarFormulario">
                                 <div class="columns is-multiline">
                                     <div class="column is-12-mobile is-6-tablet">
@@ -235,6 +245,7 @@ onBeforeUnmount(() => {
                     </div>
                 </div>
 
+                <!-- mapa interactivo con leaflet y openstreetmap. -->
                 <div class="">
                     <div class="pf-map-shell">
                         <div
