@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 
+// valores principales de powerfitgym.
 const valores = [
     {
         icono: "mdi-heart-pulse",
@@ -32,6 +33,7 @@ const valores = [
                     <p class="subtitle pf-section-subtitle">Más que un gimnasio, somos una comunidad comprometida con tu bienestar integral</p>
                 </header>
 
+                <!-- tarjetas de filosofia del gimnasio. -->
                 <div class="columns is-multiline pf-columns">
                     <div v-for="valor in valores" :key="valor.titulo" class="column is-12-mobile is-4-tablet">
                         <article class="box pf-feature-card">
@@ -42,6 +44,7 @@ const valores = [
                     </div>
                 </div>
 
+                <!-- historia e imagen institucional. -->
                 <div class="columns is-multiline is-vcentered pf-story-section">
                     <div class="column is-12-mobile is-12-tablet is-6-desktop">
                         <h2 class="title is-3 has-text-white mb-5">Nuestra Historia</h2>
@@ -64,6 +67,7 @@ const valores = [
                     </div>
                 </div>
 
+                <!-- datos principales compartidos con la pagina de inicio. -->
                 <div class="columns is-mobile is-multiline pf-columns has-text-centered">
                     <div class="column is-6-mobile is-3-tablet">
                         <article class="pf-panel pf-stat-panel"><p class="pf-stat-number">2,000+</p><p class="pf-stat-label">Vidas transformadas</p></article>

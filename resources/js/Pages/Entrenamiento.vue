@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 
+// areas del gimnasio y su equipamiento.
 const areas = [
     {
         titulo: 'Musculación',
@@ -29,6 +30,7 @@ const areas = [
     }
 ]
 
+// horario resumido de clases grupales.
 const horario = [
     { hora: '06:00', lunes: 'Spinning', martes: 'HIIT', miercoles: 'Spinning', jueves: 'HIIT', viernes: 'Spinning', sabado: 'Yoga' },
     { hora: '09:00', lunes: 'Body Pump', martes: 'Yoga', miercoles: 'Body Pump', jueves: 'Yoga', viernes: 'Body Pump', sabado: 'Cross Training' },
@@ -48,6 +50,7 @@ const horario = [
                     <p class="subtitle pf-section-subtitle">Instalaciones especializadas para cada tipo de objetivo fitness</p>
                 </header>
 
+                <!-- tarjetas con imagen de fondo para cada area. -->
                 <div class="columns is-multiline pf-columns">
                     <div v-for="area in areas" :key="area.titulo" class="column is-12-mobile is-6-tablet is-3-desktop">
                         <article class="pf-cover-card pf-training-card">
@@ -69,6 +72,7 @@ const horario = [
                     </div>
                 </div>
 
+                <!-- tabla de horarios destacados. -->
                 <section class="mt-6">
                     <h2 class="title is-4 has-text-white has-text-centered mb-5">Horario de Clases Destacadas</h2>
                     <div class="table-container pf-table-wrap">
