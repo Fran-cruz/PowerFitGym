@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- titulo dinamico de cada pagina inertia. -->
-        <title inertia>{{ config('app.name', 'PowerFitGym') }}</title>
+        <title>{{ config('app.name', 'PowerFitGym') }}</title>
 
         <!-- fuente principal del sitio. -->
         <link rel="preconnect" href="https://fonts.bunny.net">
