@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Feature extends Model
+{
+    /** @use HasFactory<\Database\Factories\FeatureFactory> */
+    use HasFactory;
+
+    protected $table = 'features';
+
+    protected $fillable = [
+        'section',
+        'title',
+        'description',
+        'icon',
+        'is_active',
+        'sort_order',
+    ];
+}
