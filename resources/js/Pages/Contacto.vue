@@ -1,5 +1,5 @@
 <script setup>
-import { Head } from '@inertiajs/vue3'
+import { Head, useForm } from '@inertiajs/vue3'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import 'leaflet/dist/leaflet.css'
@@ -13,12 +13,12 @@ const coordenadasCampus = [15.76667, -86.80047]
 let mapa = null
 let feedbackTimer = null
 
-const formulario = ref({
-    nombre: '',
+const formulario = useForm({
+    name: '',
     email: '',
-    telefono: '',
-    asunto: '',
-    mensaje: ''
+    phone: '',
+    subject: '',
+    message: ''
 })
 
 // horarios mostrados en la informacion de contacto.
@@ -30,20 +30,19 @@ const horarios = [
 ]
 
 const enviarFormulario = () => {
-    // esta etapa solo limpia el formulario y muestra confirmacion visual.
-    formulario.value = {
-        nombre: '',
-        email: '',
-        telefono: '',
-        asunto: '',
-        mensaje: ''
-    }
+    // guardar el mensaje y mostrar confirmacion cuando termina correctamente.
+    formulario.post(route('contacto.store'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            formulario.reset()
+            mensajeEnviado.value = true
 
-    mensajeEnviado.value = true
-    clearTimeout(feedbackTimer)
-    feedbackTimer = setTimeout(() => {
-        mensajeEnviado.value = false
-    }, 5000)
+            clearTimeout(feedbackTimer)
+            feedbackTimer = setTimeout(() => {
+                mensajeEnviado.value = false
+            }, 5000)
+        },
+    })
 }
 
 onMounted(async () => {
@@ -175,15 +174,16 @@ onBeforeUnmount(() => {
                     <div class="column is-12-mobile is-12-tablet is-6-desktop">
                         <article class="box pf-panel">
                             <h2 class="title is-4 has-text-white mb-5">Envíanos un Mensaje</h2>
-                            <!-- no envia una solicitud http en esta primera etapa. -->
+                            <!-- envia el mensaje a la base de datos. -->
                             <form class="pf-form" @submit.prevent="enviarFormulario">
                                 <div class="columns is-multiline">
                                     <div class="column is-12-mobile is-6-tablet">
                                         <div class="field">
                                             <label class="label" for="nombre">Nombre completo</label>
                                             <div class="control">
-                                                <input id="nombre" v-model="formulario.nombre" class="input" type="text" required placeholder="Juan Pérez" />
+                                                <input id="nombre" v-model="formulario.name" class="input" type="text" required placeholder="Juan Pérez" />
                                             </div>
+                                            <p v-if="formulario.errors.name" class="help is-danger">{{ formulario.errors.name }}</p>
                                         </div>
                                     </div>
                                     <div class="column is-12-mobile is-6-tablet">
@@ -192,6 +192,7 @@ onBeforeUnmount(() => {
                                             <div class="control">
                                                 <input id="email" v-model="formulario.email" class="input" type="email" required placeholder="juan@ejemplo.com" />
                                             </div>
+                                            <p v-if="formulario.errors.email" class="help is-danger">{{ formulario.errors.email }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -199,15 +200,16 @@ onBeforeUnmount(() => {
                                 <div class="field">
                                     <label class="label" for="telefono">Teléfono (opcional)</label>
                                     <div class="control">
-                                        <input id="telefono" v-model="formulario.telefono" class="input" type="tel" placeholder="+504 XXXX XXXX" />
+                                        <input id="telefono" v-model="formulario.phone" class="input" type="tel" placeholder="+504 XXXX XXXX" />
                                     </div>
+                                    <p v-if="formulario.errors.phone" class="help is-danger">{{ formulario.errors.phone }}</p>
                                 </div>
 
                                 <div class="field">
                                     <label class="label" for="asunto">Asunto</label>
                                     <div class="control">
                                         <div class="select is-fullwidth">
-                                            <select id="asunto" v-model="formulario.asunto" required>
+                                            <select id="asunto" v-model="formulario.subject" required>
                                                 <option value="" disabled>Selecciona un tema</option>
                                                 <option value="membresias">Información sobre membresías</option>
                                                 <option value="entrenador">Contratar entrenador personal</option>
@@ -217,6 +219,7 @@ onBeforeUnmount(() => {
                                             </select>
                                         </div>
                                     </div>
+                                    <p v-if="formulario.errors.subject" class="help is-danger">{{ formulario.errors.subject }}</p>
                                 </div>
 
                                 <div class="field">
@@ -224,16 +227,17 @@ onBeforeUnmount(() => {
                                     <div class="control">
                                         <textarea
                                             id="mensaje"
-                                            v-model="formulario.mensaje"
+                                            v-model="formulario.message"
                                             class="textarea"
                                             required
                                             rows="5"
                                             placeholder="Cuéntanos qué buscas y cómo podemos ayudarte..."
                                         ></textarea>
                                     </div>
+                                    <p v-if="formulario.errors.message" class="help is-danger">{{ formulario.errors.message }}</p>
                                 </div>
 
-                                <button type="submit" class="button is-fullwidth pf-button">
+                                <button type="submit" class="button is-fullwidth pf-button" :class="{ 'is-loading': formulario.processing }" :disabled="formulario.processing">
                                     Enviar Mensaje
                                 </button>
                             </form>

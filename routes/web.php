@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\MembershipPlanController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\TrainingAreaController;
@@ -23,3 +24,5 @@ Route::get('/nosotros', [FeatureController::class, 'about'])->name('nosotros');
 Route::get('/contacto', function () {
     return Inertia::render('Contacto');
 })->name('contacto');
+
+Route::post('/contacto', [ContactMessageController::class, 'store'])->name('contacto.store');
