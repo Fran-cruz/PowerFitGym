@@ -1,25 +1,15 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 
-// valores principales de powerfitgym.
-const valores = [
-    {
-        icono: "mdi-heart-pulse",
-        titulo: "Bienestar Integral",
-        descripcion: "No solo entrenamos el cuerpo, cultivamos la mente. Salud física, mental y emocional van de la mano."
+const props = defineProps({
+    valores: {
+        type: Array,
+        default: () => [],
     },
-    {
-        icono: "mdi-chart-line",
-        titulo: "Disciplina Progresiva",
-        descripcion: "Los resultados duraderos vienen de la constancia. Te enseñamos a construir hábitos, no soluciones rápidas."
-    },
-    {
-        icono: "mdi-handshake-outline",
-        titulo: "Acompañamiento Real",
-        descripcion: "Nunca entrenas solo. Nuestro equipo te guía, corrige y motiva en cada paso de tu camino."
-    }
-]
+});
+
+const valores = props.valores;
 </script>
 
 <template>

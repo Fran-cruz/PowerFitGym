@@ -1,33 +1,24 @@
 <?php
 
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\MembershipPlanController;
+use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\TrainingAreaController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Página de inicio pública
-Route::get('/', function () {
-    return Inertia::render('Inicio');
-})->name('inicio');
+Route::get('/', [FeatureController::class, 'index'])->name('inicio');
 
-// Páginas públicas estáticas del gimnasio
-Route::get('/membresias', function () {
-    return Inertia::render('Membresias');
-})->name('membresias');
+Route::get('/membresias', [MembershipPlanController::class, 'index'])->name('membresias');
 
-Route::get('/entrenamiento', function () {
-    return Inertia::render('Entrenamiento');
-})->name('entrenamiento');
+Route::get('/entrenamiento', [TrainingAreaController::class, 'index'])->name('entrenamiento');
 
-Route::get('/entrenadores', function () {
-    return Inertia::render('Entrenadores');
-})->name('entrenadores');
+Route::get('/entrenadores', [TrainerController::class, 'index'])->name('entrenadores');
 
-Route::get('/instalaciones', function () {
-    return Inertia::render('Instalaciones');
-})->name('instalaciones');
+Route::get('/instalaciones', [FacilityController::class, 'index'])->name('instalaciones');
 
-Route::get('/nosotros', function () {
-    return Inertia::render('Nosotros');
-})->name('nosotros');
+Route::get('/nosotros', [FeatureController::class, 'about'])->name('nosotros');
 
 Route::get('/contacto', function () {
     return Inertia::render('Contacto');

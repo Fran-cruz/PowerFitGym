@@ -2,41 +2,19 @@
 import { Head } from '@inertiajs/vue3'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 
-// areas del gimnasio y su equipamiento.
-const areas = [
-    {
-        titulo: 'Musculación',
-        descripcion: 'Zona de pesas libres y máquinas',
-        imagen: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&q=80',
-        equipamiento: ['Mancuernas 2-50kg', 'Barras olímpicas y discos', 'Racks de sentadilla', 'Máquinas selectorizadas']
+const props = defineProps({
+    areas: {
+        type: Array,
+        default: () => [],
     },
-    {
-        titulo: 'Cardio',
-        descripcion: 'Equipos de última generación',
-        imagen: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80',
-        equipamiento: ['Cintas de correr', 'Elípticas y bicicletas', 'Remos Concept2', 'Escaladoras y Air Bikes']
+    horario: {
+        type: Array,
+        default: () => [],
     },
-    {
-        titulo: 'Funcional',
-        descripcion: 'Espacio abierto y versátil',
-        imagen: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
-        equipamiento: ['Kettlebells', 'Medicine balls & Wall balls', 'Battle ropes & Sleds', 'Plyo boxes & Anillas']
-    },
-    {
-        titulo: 'Clases Grupales',
-        descripcion: 'Más de 50 clases/semana',
-        imagen: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
-        equipamiento: ['HIIT & Cross Training', 'Yoga & Mobility', 'Spinning & RPM', 'Zumba & Body Combat']
-    }
-]
+})
 
-// horario resumido de clases grupales.
-const horario = [
-    { hora: '06:00', lunes: 'Spinning', martes: 'HIIT', miercoles: 'Spinning', jueves: 'HIIT', viernes: 'Spinning', sabado: 'Yoga' },
-    { hora: '09:00', lunes: 'Body Pump', martes: 'Yoga', miercoles: 'Body Pump', jueves: 'Yoga', viernes: 'Body Pump', sabado: 'Cross Training' },
-    { hora: '18:00', lunes: 'Cross Training', martes: 'Zumba', miercoles: 'Cross Training', jueves: 'Zumba', viernes: 'HIIT', sabado: '-' },
-    { hora: '19:30', lunes: 'Yoga', martes: 'Body Combat', miercoles: 'Yoga', jueves: 'Body Combat', viernes: 'Stretch', sabado: '-' }
-]
+const areas = props.areas
+const horario = props.horario
 </script>
 
 <template>

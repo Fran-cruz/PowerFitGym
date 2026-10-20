@@ -3,16 +3,14 @@ import { Head, Link } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue';
 
-// informacion que se muestra en las tarjetas de entrenadores.
-const entrenadores = [
-    { nombre: "Carlos Mendoza", especialidad: "Hipertrofia y Fuerza", certificaciones: ["NSCA-CPT", "Fisioterapia Deportiva"], experiencia: "8 años", bio: "Especialista en ganancia de masa muscular y fuerza. Ha competido en fisicoculturismo a nivel nacional y certificado en prevención de lesiones.", imagen: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=80" },
-    { nombre: "Ana Rodríguez", especialidad: "Entrenamiento Funcional y Movilidad", certificaciones: ["CrossFit L2", "FMS", "Animal Flow"], experiencia: "6 años", bio: "Apasionada del movimiento funcional y la movilidad. Certificada en Functional Movement Systems y Animal Flow. Enfoque en calidad de movimiento.", imagen: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=800&q=80" },
-    { nombre: "Roberto Silva", especialidad: "Acondicionamiento Físico y Deportes", certificaciones: ["ACSM-CPT", "Entrenador Deportivo", "Nutrición Deportiva"], experiencia: "10 años", bio: "Ex-atleta de alto rendimiento, ahora entrena deportistas amateurs y profesionales. Enfoque en periodización y rendimiento deportivo.", imagen: "https://images.unsplash.com/photo-1786025054551-072ea2dd349c?auto=format&fit=crop&w=800&q=80" },
-    { nombre: "Mariana López", especialidad: "Pérdida de Peso y Recomposición", certificaciones: ["NASM-CPT", "CES", "Nutrición Clínica"], experiencia: "7 años", bio: "Especialista en transformación corporal sostenible. Combina entrenamiento de fuerza con nutrición flexible. Certificada en Corrective Exercise.", imagen: "https://images.unsplash.com/photo-1561402811-8cf986c35eec?auto=format&fit=crop&w=800&q=80" },
-    { nombre: "David Chen", especialidad: "Powerlifting y Fuerza Máxima", certificaciones: ["IPF Coach", "Starting Strength Coach"], experiencia: "9 años", bio: "Entrenador de powerlifting competitivo. Sus atletas han batido récords nacionales. Enfoque en técnica perfecta de los tres grandes.", imagen: "https://images.unsplash.com/photo-1550977616-efc580084ac5?auto=format&fit=crop&w=800&q=80" },
-    { nombre: "Sofía Herrera", especialidad: "Yoga Terapéutico y Movilidad", certificaciones: ["RYT-500", "Yoga Therapy", "FRCms"], experiencia: "8 años", bio: "Especialista en yoga para atletas y rehabilitación. Combina movimiento funcional con respiración y mindfulness.", imagen: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=800&q=80" },
-    { nombre: "Javier Ruiz", especialidad: "Boxeo y Acondicionamiento Combate", certificaciones: ["AIBA Coach", "CrossFit L2", "FMS"], experiencia: "11 años", bio: "Ex-boxeador profesional. Entrena tanto boxeadores competitivos como clientes que buscan acondicionamiento tipo combate.", imagen: "https://images.unsplash.com/flagged/photo-1574005280900-3ff489fa1f70?auto=format&fit=crop&w=800&q=80" }
-];
+const props = defineProps({
+    entrenadores: {
+        type: Array,
+        default: () => [],
+    },
+});
+
+const entrenadores = props.entrenadores;
 
 // Cada tarjeta ocupa una fracción exacta del carril, incluido su espaciado.
 const itemsPerView = ref(4);

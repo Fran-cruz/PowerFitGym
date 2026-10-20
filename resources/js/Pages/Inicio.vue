@@ -2,15 +2,14 @@
 import { Head, Link } from '@inertiajs/vue3'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 
-// contenido de las tarjetas de beneficios.
-const caracteristicas = [
-    { icono: 'mdi-weight-lifter', titulo: 'Equipamiento de Primera', descripcion: 'Máquinas de última generación y pesas libres para todos los niveles.' },
-    { icono: 'mdi-account-tie', titulo: 'Entrenadores Certificados', descripcion: 'Profesionales que te guían y motivan en cada sesión de entrenamiento.' },
-    { icono: 'mdi-clock-outline', titulo: 'Horarios Flexibles', descripcion: 'Abierto de 4:00 AM a 11:00 PM, los 7 días de la semana.' },
-    { icono: 'mdi-account-group', titulo: 'Comunidad Activa', descripcion: 'Clases grupales, eventos y una familia que te apoya.' },
-    { icono: 'mdi-spa-outline', titulo: 'Zona de Relax', descripcion: 'Sauna, jacuzzi y área de estiramiento para tu recuperación.' },
-    { icono: 'mdi-food-apple', titulo: 'Nutrición Personalizada', descripcion: 'Planes alimenticios adaptados a tus objetivos.' },
-]
+const props = defineProps({
+    caracteristicas: {
+        type: Array,
+        default: () => [],
+    },
+})
+
+const caracteristicas = props.caracteristicas
 
 // estadisticas mostradas debajo de los beneficios.
 const estadisticas = [

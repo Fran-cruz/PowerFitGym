@@ -3,16 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facility;
+use App\Models\Feature;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class FacilityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        return Inertia::render('Instalaciones', [
+            'instalaciones' => Facility::query()
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->get()
+                ->map(fn (Facility $facility): array => [
+                    'titulo' => $facility->name,
+                    'descripcion' => $facility->description,
+                    'imagen' => $facility->image_url,
+                ])
+                ->all(),
+            'caracteristicas' => Feature::query()
+                ->where('section', 'facility')
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->get()
+                ->map(fn (Feature $feature): array => [
+                    'icono' => $feature->icon,
+                    'titulo' => $feature->title,
+                    'descripcion' => $feature->description,
+                ])
+                ->all(),
+        ]);
     }
 
     /**

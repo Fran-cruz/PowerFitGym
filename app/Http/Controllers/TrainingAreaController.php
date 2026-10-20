@@ -2,17 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GroupClass;
 use App\Models\TrainingArea;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class TrainingAreaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        $days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+
+        $horario = GroupClass::query()
+            ->where('is_active', true)
+            ->orderBy('start_time')
+            ->get()
+            ->groupBy('start_time')
+            ->map(function ($classes, string $startTime) use ($days): array {
+                $row = array_fill_keys($days, '-');
+                $row['hora'] = substr($startTime, 0, 5);
+
+                foreach ($classes as $class) {
+                    $day = str_replace(['miércoles', 'sábado'], ['miercoles', 'sabado'], $class->day_of_week);
+
+                    if (array_key_exists($day, $row)) {
+                        $row[$day] = $class->name;
+                    }
+                }
+
+                return $row;
+            })
+            ->values()
+            ->all();
+
+        return Inertia::render('Entrenamiento', [
+            'areas' => TrainingArea::query()
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->get()
+                ->map(fn (TrainingArea $area): array => [
+                    'titulo' => $area->name,
+                    'descripcion' => $area->description,
+                    'imagen' => $area->image_url,
+                    'equipamiento' => json_decode($area->equipment, true) ?? [],
+                ])
+                ->all(),
+            'horario' => $horario,
+        ]);
     }
 
     /**
